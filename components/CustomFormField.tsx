@@ -13,12 +13,14 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { Control } from "react-hook-form";
+import { FormFieldType } from "./forms/PatientForm";
 
 interface CustomProps {
   control: Control<any>;
+  fieldType:FormFieldType
 }
 
-const CustomFormField = ({ control }: CustomProps) => {
+const CustomFormField = ({ control,fieldType }: CustomProps) => {
   return (
     <FormField
       control={control}
