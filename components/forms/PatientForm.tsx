@@ -8,7 +8,8 @@ import { Form } from "@/components/ui/form";
 import CustomFormField from "../CustomFormField";
 import SubmitButton from "../SubmitButton";
 import { UserFormValidation } from "@/lib/validation";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { createUser } from "@/lib/actions/patient.actions";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -40,18 +41,34 @@ const PatientForm = () => {
   }: z.infer<typeof UserFormValidation>) {
     setIsLoading(true);
 
+    console.log("onSubmit function called"); // Prueba de que se ejecuta onSubmit
+
     try {
-      // const userData = { name, email, phone };
-      // const user = await createUser(userData);
-      // if(user) router.push(`/patients/${user.$id}/register`)
+      const userData = { name, email, phone };
+      console.log("Creating user with data:", userData); // Datos del usuario
+
+      const user = await createUser(userData);
+
+      if (user) {
+        console.log("User created:", user); // Verifica si se crea el usuario
+        router.push(`/patients/${user.$id}/register`);
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Error creating user:", error);
     }
+
+    setIsLoading(false);
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          console.log("Form submitted with data:", data); // Prueba de que el form está validado y se llama a handleSubmit
+          onSubmit(data);
+        })}
+        className="space-y-6 flex-1"
+      >
         <section className="mb-12 space-y-4">
           <h1 className="header">Hi there 👋</h1>
           <p className="text-dark-700">Schedule your first appointment.</p>
