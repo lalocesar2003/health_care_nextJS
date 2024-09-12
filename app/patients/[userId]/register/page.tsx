@@ -7,9 +7,9 @@ import React from "react";
 const Register = async ({ params: { userId } }: SearchParamProps) => {
   const user = await getUser(userId);
   return (
-<div className="flex h-screen max-h-screen">
-  <section className="remove-scrollbar container">
-    <div className="sub-container max-w-[860px] flex-1 flex-col py-10">
+    <div className="flex h-screen max-h-screen">
+      <section className="remove-scrollbar container">
+        <div className="sub-container max-w-[860px] flex-1 flex-col py-10">
           <Image
             src="/assets/icons/logo-full.svg"
             height={1000}
@@ -20,12 +20,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 
           <RegisterForm user={user} />
 
-      
-            <p className="justify-items-end text-dark-600 xl:text-left">
-              © 2024 CarePulse
-            </p>
-       
-          
+          <p className="copyright py-12">© 2024 CarePulse</p>
         </div>
       </section>
       <Image
