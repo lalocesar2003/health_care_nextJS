@@ -1,8 +1,13 @@
+import AppointmentForm from "@/components/forms/AppointmentForm";
 import PatientForm from "@/components/forms/PatientForm";
+import { getPatient } from "@/lib/actions/patient.actions";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function NewAppointment() {
+export default async function NewAppointment({
+  params: { userId },
+}: SearchParamProps) {
+  const patient = await getPatient(userId);
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
@@ -15,23 +20,23 @@ export default function NewAppointment() {
             className="mb-12 h-10 w-fit"
           />
 
-          <PatientForm />
-          <div className="text-14-regular mt-20 flex justify-between">
-            <p className="justify-items-end text-dark-600 xl:text-left">
-              © 2024 CarePulse
-            </p>
-            <Link href="/?admin=true" className="text-green-500">
-              Admin
-            </Link>
-          </div>
+          <AppointmentForm
+            type="create"
+            userId={userId}
+            patientId={patient.$id}
+          />
+
+          <p className="justify-items-end text-dark-600 xl:text-left">
+            © 2024 CarePulse
+          </p>
         </div>
       </section>
       <Image
-        src="/assets/images/onboarding-img.png"
+        src="/assets/images/appointment-img.png"
         height={1000}
         width={1000}
-        alt="patient"
-        className="side-img max-w-[50%]"
+        alt="appointment"
+        className="side-img max-w-[390px] bg-bottom"
       />
     </div>
   );
