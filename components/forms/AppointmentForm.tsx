@@ -85,7 +85,7 @@ const AppointmentForm = ({
           form.reset();
           router.push(
             //EN TEORIA NO DEBERIA AFECTAR
-            `/patients/${userId}/new_appointment/success?appointmentId=${appointment.id}`
+            `/patients/${userId}/new_appointment/success?appointmentId=${appointment.$id}`
           );
         }
       }
