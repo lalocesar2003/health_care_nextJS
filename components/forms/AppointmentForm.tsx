@@ -26,6 +26,7 @@ export enum FormFieldType {
 }
 const AppointmentForm = ({
   userId,
+  //EN TEORIA NO DEBERIA AFECTAR PORQUE ES COMO LLAMO AL CONTENEDOR DE LA VARIABLE
   patientId,
   type,
 }: {
@@ -69,7 +70,8 @@ const AppointmentForm = ({
       if (type === "create" && patientId) {
         const appointmentData = {
           userId,
-          patient: patientId,
+          ///AQUI HAY UNO
+          paciente: patientId,
           primaryPhysician: values.primaryPhysician,
           schedule: new Date(values.schedule),
           reason: values.reason!,
@@ -82,6 +84,7 @@ const AppointmentForm = ({
         if (appointment) {
           form.reset();
           router.push(
+            //EN TEORIA NO DEBERIA AFECTAR
             `/patients/${userId}/new_appointment/success?appointmentId=${appointment.id}`
           );
         }
