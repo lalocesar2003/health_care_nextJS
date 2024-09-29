@@ -85,13 +85,13 @@ export const columns: ColumnDef<Payment>[] = [
             type="schedule"
             patientId={data.paciente.$id}
             userId={data.userId}
-            appointmentId={data}
+            appointment={data}
           />
           <AppointmentModal
             type="cancel"
             patientId={data.paciente.$id}
             userId={data.userId}
-            appointmentId={data}
+            appointment={data}
           />
         </div>
       );
